@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  portainer:
+    image: portainer/portainer:latest
+    command: -H unix://${DOCKER_SOCKET:-/var/run/docker.sock}
+    ports:
+      - 9000:9000
+    volumes:
+      - ${DOCKER_SOCKET:-/var/run/docker.sock}:${DOCKER_SOCKET:-/var/run/docker.sock}
+      - portainer_data:/data
+
+volumes:
+  portainer_data:
