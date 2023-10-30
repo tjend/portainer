@@ -36,8 +36,9 @@ help:
 
 # run portainer in docker
 portainer-in-docker:
-	echo "Access portainer at http://localhost:9000/ (admin/adminadmin recommended) - press CTRL-C when done."
+	echo "Access portainer at http://localhost:9000/ (admin/adminadminadmin recommended) - press CTRL-C when done."
 	trap 'true' INT # allows ctrl-c to exit gracefully
+	${DOCKER_COMPOSE} pull
 	${DOCKER_COMPOSE} up
 	${DOCKER_COMPOSE} down
 
@@ -45,5 +46,6 @@ portainer-in-docker:
 portainer-in-podman:
 	echo "Access portainer at http://localhost:9000/ (admin/adminadmin recommended) - press CTRL-C when done."
 	trap 'true' INT # allows ctrl-c to exit gracefully
+	DOCKER_SOCKET=${PODMAN_SOCKET} DOCKER_HOST=${PODMAN_HOST} ${DOCKER_COMPOSE} pull
 	DOCKER_SOCKET=${PODMAN_SOCKET} DOCKER_HOST=${PODMAN_HOST} ${DOCKER_COMPOSE} up
 	DOCKER_SOCKET=${PODMAN_SOCKET} DOCKER_HOST=${PODMAN_HOST} ${DOCKER_COMPOSE} down

@@ -2,8 +2,8 @@ version: '3.9'
 
 services:
   portainer:
-    image: portainer/portainer:latest
-    command: -H unix://${DOCKER_SOCKET:-/var/run/docker.sock}
+    image: docker.io/portainer/portainer-ce:latest
+    command: --host unix://${DOCKER_SOCKET:-/var/run/docker.sock}
     ports:
       - 9000:9000
     volumes:
